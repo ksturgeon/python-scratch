@@ -1,4 +1,6 @@
+from pydrill.client import PyDrill
 import jaydebeapi
+
 jdbc_driver="org.apache.drill.jdbc.Driver"
 driver_jar="/opt/mapr/drill/jars/jdbc-driver/drill-jdbc-all-1.11.0.jar"
 
@@ -16,4 +18,8 @@ print("JDBC cursor fetchall method")
 print(curs.fetchall())
 
 curs.close()
+
+drill = PyDrill(host='mdn', port=8047)
+drill = PyDrill(auth='mapr:,maprmapr')
+employees = drill.query('''SELECT * FROM cp.`employee.json` LIMIT 5''')
 
